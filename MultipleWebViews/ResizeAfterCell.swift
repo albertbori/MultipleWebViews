@@ -17,7 +17,7 @@ public class ResizeAfterCell: UITableViewCell, UIWebViewDelegate {
     
     private weak var tableView: UITableView?
     
-    public func configureCell(htmlContent: String, tableView: UITableView, estimatedContentHeight: CGFloat? = nil) {
+    public func configureCell(htmlContent: String, tableView: UITableView) {
         contentWebView.delegate = self
         contentWebView.scrollView.scrollEnabled = false
         contentWebView.loadHTMLString(htmlContent, baseURL: nil)

@@ -1,0 +1,24 @@
+PODS:
+  - DTCoreText (1.6.15):
+    - DTFoundation/Core (~> 1.7.5)
+    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
+    - DTFoundation/DTHTMLParser (~> 1.7.5)
+    - DTFoundation/UIKit (~> 1.7.5)
+  - DTFoundation/Core (1.7.5)
+  - DTFoundation/DTAnimatedGIF (1.7.5)
+  - DTFoundation/DTHTMLParser (1.7.5):
+    - DTFoundation/Core
+  - DTFoundation/UIKit (1.7.5):
+    - DTFoundation/Core
+  - MBProgressHUD (0.9)
+
+DEPENDENCIES:
+  - DTCoreText
+  - MBProgressHUD (~> 0.8)
+
+SPEC CHECKSUMS:
+  DTCoreText: d446600133d01214758ff45004b1b8109e5b8c9f
+  DTFoundation: bea4e07459f0f88a5aa3b8258fab1576bbe2e58c
+  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
+
+COCOAPODS: 0.36.0.rc.1
