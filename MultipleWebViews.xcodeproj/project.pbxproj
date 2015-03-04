@@ -17,6 +17,9 @@
 		70C3FF721AA76E20002931A1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C3FF711AA76E20002931A1 /* Model.swift */; };
 		70C3FF751AA76EED002931A1 /* PreEstimatedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C3FF741AA76EED002931A1 /* PreEstimatedCell.swift */; };
 		70C3FF771AA77008002931A1 /* PreEstimatedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70C3FF761AA77008002931A1 /* PreEstimatedCell.xib */; };
+		70D224BE1AA7AB66001A15D6 /* ResizeAfterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D224BB1AA7AB66001A15D6 /* ResizeAfterCell.swift */; };
+		70D224BF1AA7AB66001A15D6 /* ResizeAfterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70D224BC1AA7AB66001A15D6 /* ResizeAfterCell.xib */; };
+		70D224C01AA7AB66001A15D6 /* ResizeAfterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D224BD1AA7AB66001A15D6 /* ResizeAfterTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		70C3FF711AA76E20002931A1 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		70C3FF741AA76EED002931A1 /* PreEstimatedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreEstimatedCell.swift; sourceTree = "<group>"; };
 		70C3FF761AA77008002931A1 /* PreEstimatedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreEstimatedCell.xib; sourceTree = "<group>"; };
+		70D224BB1AA7AB66001A15D6 /* ResizeAfterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizeAfterCell.swift; sourceTree = "<group>"; };
+		70D224BC1AA7AB66001A15D6 /* ResizeAfterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResizeAfterCell.xib; sourceTree = "<group>"; };
+		70D224BD1AA7AB66001A15D6 /* ResizeAfterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizeAfterTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,7 @@
 		70C3FF4C1AA76A8C002931A1 /* MultipleWebViews */ = {
 			isa = PBXGroup;
 			children = (
+				70D224B81AA7AAD3001A15D6 /* ResizeAfterTableView */,
 				70C3FF731AA76ECA002931A1 /* PreEstimatedTableView */,
 				70C3FF4D1AA76A8C002931A1 /* Supporting Files */,
 				70C3FF4F1AA76A8C002931A1 /* AppDelegate.swift */,
@@ -130,6 +137,16 @@
 				70C3FF761AA77008002931A1 /* PreEstimatedCell.xib */,
 			);
 			name = PreEstimatedTableView;
+			sourceTree = "<group>";
+		};
+		70D224B81AA7AAD3001A15D6 /* ResizeAfterTableView */ = {
+			isa = PBXGroup;
+			children = (
+				70D224BB1AA7AB66001A15D6 /* ResizeAfterCell.swift */,
+				70D224BC1AA7AB66001A15D6 /* ResizeAfterCell.xib */,
+				70D224BD1AA7AB66001A15D6 /* ResizeAfterTableViewController.swift */,
+			);
+			name = ResizeAfterTableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70D224BF1AA7AB66001A15D6 /* ResizeAfterCell.xib in Resources */,
 				70C3FF771AA77008002931A1 /* PreEstimatedCell.xib in Resources */,
 				70C3FF551AA76A8C002931A1 /* Main.storyboard in Resources */,
 				70C3FF5A1AA76A8C002931A1 /* LaunchScreen.xib in Resources */,
@@ -237,7 +255,9 @@
 				70C3FF751AA76EED002931A1 /* PreEstimatedCell.swift in Sources */,
 				70C3FF701AA76B9B002931A1 /* PreEstimatedTableViewController.swift in Sources */,
 				70C3FF501AA76A8C002931A1 /* AppDelegate.swift in Sources */,
+				70D224BE1AA7AB66001A15D6 /* ResizeAfterCell.swift in Sources */,
 				70C3FF721AA76E20002931A1 /* Model.swift in Sources */,
+				70D224C01AA7AB66001A15D6 /* ResizeAfterTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +449,7 @@
 				70C3FF6B1AA76A8C002931A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		70C3FF6C1AA76A8C002931A1 /* Build configuration list for PBXNativeTarget "MultipleWebViewsTests" */ = {
 			isa = XCConfigurationList;
@@ -437,6 +458,7 @@
 				70C3FF6E1AA76A8C002931A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

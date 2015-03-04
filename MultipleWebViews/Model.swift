@@ -29,8 +29,8 @@ public class Model {
     }
     
     private class func getFullHTML(innerHTML: String) -> String {
-        //var style = "html{font-family:sans-serif;-webkit-text-size-adjust:100%;} body{background-color: #f2f8fa;margin:0;padding:0;border: 1px solid black;word-wrap: break-word} img{max-width:100%} code,pre{white-space: pre-wrap}" //<-- This causes even more height calculation incorrectness. Namely, image height is wrong, and forced-broken words are wrong
-        var style = "html{font-family:sans-serif;-webkit-text-size-adjust:100%;} body{background-color: #f2f8fa;margin:0;padding:0;border: 1px solid blue}" //<-- nothing broken with this, except for naturally wrapping text height is wrong
+        var style = "html{font-family:sans-serif;-webkit-text-size-adjust:100%;} body{background-color: #f2f8fa;margin:0;padding:0;border: 1px solid blue;word-wrap: break-word} img{max-width:100%} code,pre{white-space: pre-wrap}" //<-- This causes even more height calculation incorrectness. Namely, image height is wrong, and forced-broken words are wrong
+        //var style = "html{font-family:sans-serif;-webkit-text-size-adjust:100%;} body{background-color: #f2f8fa;margin:0;padding:0;border: 1px solid blue}" //<-- nothing broken with this, except for naturally wrapping text height is wrong
         
         var html = "<html><head><style type='text/css'>\(style)</style></head><body>\(innerHTML)</body></html>"
         
