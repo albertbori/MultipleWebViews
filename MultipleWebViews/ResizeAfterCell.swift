@@ -15,23 +15,31 @@ public class ResizeAfterCell: UITableViewCell, UIWebViewDelegate {
     @IBOutlet weak var contentWebViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dateLabel: UILabel!
     
-    private weak var tableView: UITableView?
+    private var _cellData: ResizeAfterCellData!
     
-    public func configureCell(htmlContent: String, tableView: UITableView) {
+    public func configureCell(cellData: ResizeAfterCellData) {
+        self._cellData = cellData
         contentWebView.delegate = self
         contentWebView.scrollView.scrollEnabled = false
-        contentWebView.loadHTMLString(htmlContent, baseURL: nil)
+        if let contentHeight = cellData.contentHeight {
+            self.contentWebViewHeightConstraint.constant = contentHeight
+        }
+        contentWebView.loadHTMLString(cellData.content, baseURL: nil)
         dateLabel.text = NSDate().description
     }
     
     public func webViewDidFinishLoad(webView: UIWebView) {
-        
-        println("got webView.scrollView.contentSize.height: \(webView.scrollView.contentSize.height) from webView.scrollView.contentSize.width: \(webView.scrollView.contentSize.width)")
-        
-        self.contentWebViewHeightConstraint.constant = webView.scrollView.contentSize.height
-        self.layoutIfNeeded()
-        
-        self.tableView?.beginUpdates()
-        self.tableView?.endUpdates()
+        if _cellData.height == nil {
+            println("got contentSize.height: \(webView.scrollView.contentSize.height) from contentSize.width: \(webView.scrollView.contentSize.width)")
+            
+            _cellData.contentHeight = webView.scrollView.contentSize.height
+            _cellData.height = webView.scrollView.contentSize.height + self.frame.height //minus the default height of the web view
+            println("get total height to \(_cellData.height!)")
+            
+            var tableView = self.superview!.superview as UITableView
+            if let indexPath = tableView.indexPathForCell(self) {
+                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+            }
+        }
     }
 }

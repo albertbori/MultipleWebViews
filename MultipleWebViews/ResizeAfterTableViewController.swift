@@ -11,14 +11,20 @@ import UIKit
 
 class ResizeAfterTableViewController: UITableViewController {
     
-    var data: [String] = []
+    var data: [ResizeAfterCellData] = []
+    
     
     //MARK: - UIViewController
     
     override func viewDidLoad() {
         tableView.registerNib(UINib(nibName: "ResizeAfterCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "ResizeAfterCell")
         
-        self.data = Model.getTestData()
+        var content = Model.getTestData()
+        for i in 0..<content.count {
+            var contentData = ResizeAfterCellData()
+            contentData.content = content[i]
+            data.append(contentData)
+        }
     }
     
     
@@ -28,9 +34,22 @@ class ResizeAfterTableViewController: UITableViewController {
         return data.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var estimatedCell = tableView.dequeueReusableCellWithIdentifier("ResizeAfterCell") as ResizeAfterCell
-        estimatedCell.configureCell(data[indexPath.row], tableView: self.tableView)
-        return estimatedCell
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if let height = data[indexPath.row].height {
+            return height
+        }
+        return UITableViewAutomaticDimension
     }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("ResizeAfterCell") as ResizeAfterCell
+        cell.configureCell(data[indexPath.row])
+        return cell
+    }
+}
+
+public class ResizeAfterCellData {
+    var content: String = ""
+    var height: CGFloat?
+    var contentHeight: CGFloat?
 }
