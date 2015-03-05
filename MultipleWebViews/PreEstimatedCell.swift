@@ -39,8 +39,7 @@ public class PreEstimatedCell: UITableViewCell, UIWebViewDelegate {
     public func webViewDidFinishLoad(webView: UIWebView) {
         if let didEstimateContentHeight = _didEstimateContentHeight {
             var widthString = webView.stringByEvaluatingJavaScriptFromString("document.body.offsetWidth")!
-            //var heightString: NSString = webView.stringByEvaluatingJavaScriptFromString("document.body.offsetHeight")! as NSString
-            var heightString: NSString = webView.stringByEvaluatingJavaScriptFromString("Math.max( document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight );")! as NSString
+            var heightString: NSString = webView.stringByEvaluatingJavaScriptFromString("document.body.offsetHeight")! as NSString
             println("got contentHeight: \(heightString) from contentWidth: \(widthString)")
             contentWebViewHeightConstraint.constant = CGFloat(heightString.floatValue)
             didEstimateContentHeight(contentHeight: contentWebViewHeightConstraint.constant)
