@@ -156,9 +156,9 @@
 		70C3FF731AA76ECA002931A1 /* PreEstimatedTableView */ = {
 			isa = PBXGroup;
 			children = (
-				70C3FF6F1AA76B9B002931A1 /* PreEstimatedTableViewController.swift */,
 				70C3FF741AA76EED002931A1 /* PreEstimatedCell.swift */,
 				70C3FF761AA77008002931A1 /* PreEstimatedCell.xib */,
+				70C3FF6F1AA76B9B002931A1 /* PreEstimatedTableViewController.swift */,
 			);
 			name = PreEstimatedTableView;
 			sourceTree = "<group>";
