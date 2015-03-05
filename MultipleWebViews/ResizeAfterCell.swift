@@ -35,7 +35,7 @@ public class ResizeAfterCell: UITableViewCell, UIWebViewDelegate {
                 var contentHeight = webView.scrollView.contentSize.height
                 
                 _cellData.contentHeight = contentHeight
-                _cellData.height = contentHeight + self.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+                _cellData.height = contentHeight + self.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height - contentWebViewHeightConstraint.constant
                 
                 println("row: \(indexPath.row)\tcontentHeight: \(contentHeight)\tcontentWidth: \(webView.scrollView.contentSize.width)\tcellFrameHeight: \(self.frame.height)\ttotalHeight: \(_cellData.height!)")
                 tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
