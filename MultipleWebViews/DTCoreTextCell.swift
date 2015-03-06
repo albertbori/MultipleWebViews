@@ -16,9 +16,8 @@ public class DTCoreTextCell: UITableViewCell, UIWebViewDelegate {
     
     private weak var tableView: UITableView?
     
-    public func configureCell(htmlContent: String) {
-        var data = htmlContent.dataUsingEncoding(NSUTF8StringEncoding)
-        contentTextView.attributedText = NSAttributedString(data: data!, options: nil, documentAttributes: nil, error: nil)
+    public func configureCell(data: DTCoreTextCellData) {
+        contentTextView.attributedText = data.content
         dateLabel.text = NSDate().description
     }
 }

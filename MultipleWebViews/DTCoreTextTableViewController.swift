@@ -8,17 +8,27 @@
 
 import Foundation
 import UIKit
+import MBProgressHUD
 
 class DTCoreTextTableViewController: UITableViewController {
     
-    var data: [String] = []
+    var data: [DTCoreTextCellData] = []
     
     //MARK: - UIViewController
     
     override func viewDidLoad() {
         tableView.registerNib(UINib(nibName: "DTCoreTextCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "DTCoreTextCell")
-        
-        self.data = Model.getTestData()
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            var contents = Model.getTestData()
+            var data = contents.map({ DTCoreTextCellData(content: $0) }) as [DTCoreTextCellData]
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.data = data
+                self.tableView.reloadData()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+            })
+        })
     }
     
     
@@ -32,5 +42,14 @@ class DTCoreTextTableViewController: UITableViewController {
         var estimatedCell = tableView.dequeueReusableCellWithIdentifier("DTCoreTextCell") as DTCoreTextCell
         estimatedCell.configureCell(data[indexPath.row])
         return estimatedCell
+    }
+}
+
+public class DTCoreTextCellData {
+    var content: NSAttributedString
+    
+    init(content: String) {
+        var data = content.dataUsingEncoding(NSUTF8StringEncoding)
+        self.content = NSAttributedString(data: data!, options: nil, documentAttributes: nil, error: nil)!
     }
 }
