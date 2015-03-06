@@ -13,16 +13,18 @@ import MBProgressHUD
 class ResizeAfterTableViewController: UITableViewController {
     
     var data: [ResizeAfterCellData] = []
-    var loadingCover: UIView!
+    var loadingCover: UIView = UIView()
+    var scrollToIndex: Int?
     
+    var isFinishedLoading: Bool {
+        return (tableView.visibleCells() as [ResizeAfterCell]).filter({ $0.cellData.height == nil }).count == 0 && scrollToIndex == nil
+    }
     
     //MARK: - UIViewController
     
     override func viewDidLoad() {
         tableView.registerNib(UINib(nibName: "ResizeAfterCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "ResizeAfterCell")
-        loadingCover = UIView(frame: tableView.frame)
-        loadingCover.backgroundColor = tableView.backgroundColor
-        self.view.addSubview(loadingCover)
+        showLoadingScreen()
         
         var content = Model.getTestData()
         for i in 0..<content.count {
@@ -30,13 +32,17 @@ class ResizeAfterTableViewController: UITableViewController {
             contentData.content = content[i]
             data.append(contentData)
         }
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        
+        scrollToIndex = 5
     }
     
-    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if loadingCover.superview != nil && data.filter({ cellData in cellData.height != nil }).count >= tableView.visibleCells().count {
-            loadingCover.removeFromSuperview()
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+    override func viewDidAppear(animated: Bool) {
+        if let scrollToIndex = scrollToIndex {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.01 * Double(NSEC_PER_SEC))),
+                dispatch_get_main_queue(), {
+                    self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: scrollToIndex, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+                }
+            )
         }
     }
     
@@ -58,6 +64,55 @@ class ResizeAfterTableViewController: UITableViewController {
         var cell = tableView.dequeueReusableCellWithIdentifier("ResizeAfterCell") as ResizeAfterCell
         cell.configureCell(data[indexPath.row])
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if loadingCover.superview != nil && isFinishedLoading {
+            hideLoadingScreen()
+        }
+    }
+    
+    
+    //MARK: - UIScrollView
+    
+    override func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        println("scrolled")
+        if let scrollToIndex = scrollToIndex {
+            //Check if the destination cell is visible, and loaded. If not, scroll again.
+            var visibleCells = tableView.visibleCells() as [ResizeAfterCell]
+            var destinationCell = visibleCells.filter({ $0.cellData.height != nil && self.tableView.indexPathForCell($0)!.row == self.scrollToIndex! }).first
+            if destinationCell == nil {
+                println("not there yet...")
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: scrollToIndex, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            } else {
+                //scroll one last time to make sure the cell is properly oriented
+                self.scrollToIndex = nil
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: scrollToIndex, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+                println("all done")
+            }
+        }
+    }
+    
+    
+    //MARK: - Helper functions
+    
+    private func showLoadingScreen() {
+        if loadingCover.superview == nil {
+            loadingCover.backgroundColor = UIColor.blueColor()
+            loadingCover.setTranslatesAutoresizingMaskIntoConstraints(false)
+            var navBar = self.navigationController?.view.subviews.filter({ $0 is UINavigationBar }).first! as UINavigationBar
+            self.navigationController?.view.addSubview(loadingCover)
+            var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:[navBar][loadingCover]|", options: nil, metrics: nil, views: ["loadingCover": loadingCover, "navBar": navBar])
+            constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[loadingCover]|", options: nil, metrics: nil, views: ["loadingCover": loadingCover])
+            self.navigationController?.view.addConstraints(constraints)
+        }
+        loadingCover.hidden = false
+        MBProgressHUD.showHUDAddedTo(loadingCover, animated: true)
+    }
+    
+    private func hideLoadingScreen() {
+        MBProgressHUD.hideHUDForView(loadingCover, animated: true)
+        loadingCover.hidden = true
     }
 }
 

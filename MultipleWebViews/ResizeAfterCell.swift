@@ -15,10 +15,10 @@ public class ResizeAfterCell: UITableViewCell, UIWebViewDelegate {
     @IBOutlet weak var contentWebViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dateLabel: UILabel!
     
-    private var _cellData: ResizeAfterCellData!
+    var cellData: ResizeAfterCellData!
     
     public func configureCell(cellData: ResizeAfterCellData) {
-        self._cellData = cellData
+        self.cellData = cellData
         contentWebView.delegate = self
         contentWebView.scrollView.scrollEnabled = false
         self.contentWebViewHeightConstraint.constant = cellData.contentHeight ?? 1
@@ -27,18 +27,18 @@ public class ResizeAfterCell: UITableViewCell, UIWebViewDelegate {
     }
     
     public func webViewDidFinishLoad(webView: UIWebView) {
-        if _cellData.height == nil {
-            var tableView = self.superview!.superview as UITableView
-            if let indexPath = tableView.indexPathForCell(self) {
-                self.layoutIfNeeded()
-            
-                var contentHeight = webView.scrollView.contentSize.height
-                
-                _cellData.contentHeight = contentHeight
-                _cellData.height = contentHeight + self.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height - contentWebViewHeightConstraint.constant
-                
-                println("row: \(indexPath.row)\tcontentHeight: \(contentHeight)\tcontentWidth: \(webView.scrollView.contentSize.width)\tcellFrameHeight: \(self.frame.height)\ttotalHeight: \(_cellData.height!)")
-                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+        if cellData.height == nil {
+            if let var tableView = self.superview?.superview as? UITableView {
+                if let indexPath = tableView.indexPathForCell(self) {
+                    
+                    var contentHeight = webView.scrollView.contentSize.height
+                    
+                    cellData.contentHeight = contentHeight
+                    cellData.height = contentHeight + self.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height - contentWebViewHeightConstraint.constant
+                    
+                    println("row: \(indexPath.row)\tcontentHeight: \(contentHeight)\tcontentWidth: \(webView.scrollView.contentSize.width)\tcellFrameHeight: \(self.frame.height)\ttotalHeight: \(cellData.height!)")
+                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+                }
             }
         }
     }
