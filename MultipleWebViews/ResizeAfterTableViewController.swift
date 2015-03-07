@@ -23,6 +23,8 @@ class ResizeAfterTableViewController: UITableViewController {
     //MARK: - UIViewController
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         tableView.registerNib(UINib(nibName: "ResizeAfterCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "ResizeAfterCell")
         showLoadingScreen()
         
@@ -33,7 +35,7 @@ class ResizeAfterTableViewController: UITableViewController {
             data.append(contentData)
         }
         
-        scrollToIndex = 5
+        //scrollToIndex = 5 //uncomment this to test jumping to a specific post
     }
     
     override func viewDidAppear(animated: Bool) {

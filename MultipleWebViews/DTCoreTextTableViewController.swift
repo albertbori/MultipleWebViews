@@ -17,6 +17,8 @@ class DTCoreTextTableViewController: UITableViewController {
     //MARK: - UIViewController
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         tableView.registerNib(UINib(nibName: "DTCoreTextCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "DTCoreTextCell")
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
