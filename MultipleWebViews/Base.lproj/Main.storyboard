@@ -73,6 +73,24 @@
                                             <segue destination="gtk-hG-hk9" kind="show" id="X4H-3F-Xan"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ajz-fB-8ng">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ajz-fB-8ng" id="Ttp-fY-yxN">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UITableView Estimate During" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ype-Zs-Vye">
+                                                    <rect key="frame" x="8" y="11" width="221" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="zhL-Yp-gAv" kind="show" id="QI8-Qd-JgS"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -86,6 +104,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ah8-po-wIS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="985" y="432"/>
+        </scene>
+        <!--Estimate During Table View Controller-->
+        <scene sceneID="Vjc-Dt-rvW">
+            <objects>
+                <tableViewController id="zhL-Yp-gAv" customClass="EstimateDuringTableViewController" customModule="MultipleWebViews" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="b1y-Fj-hXf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="EwC-iV-wbB">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EwC-iV-wbB" id="nYY-0p-kOp">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zhL-Yp-gAv" id="tFF-bg-rwa"/>
+                            <outlet property="delegate" destination="zhL-Yp-gAv" id="q5k-Do-tRD"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PXm-ru-6tn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="985" y="1178"/>
         </scene>
         <!--Core Text Table View Controller-->
         <scene sceneID="1KG-Kx-HKi">
@@ -111,7 +155,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzb-43-SbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="985" y="1130"/>
+            <point key="canvasLocation" x="1702" y="1178"/>
         </scene>
         <!--Pre Estimated Table View Controller-->
         <scene sceneID="aNk-gL-B12">
@@ -137,7 +181,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIe-3N-sSi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1702" y="248"/>
+            <point key="canvasLocation" x="1702" y="-244"/>
         </scene>
         <!--Resize After Table View Controller-->
         <scene sceneID="Q2C-Ib-UKJ">
@@ -163,7 +207,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PXh-AH-eB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1702" y="928"/>
+            <point key="canvasLocation" x="1702" y="432"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="n6z-jU-0qe">

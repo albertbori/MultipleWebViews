@@ -11,6 +11,9 @@
 		70373EBC1AA7BD8C00A7C8AC /* DTCoreTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70373EB91AA7BD8C00A7C8AC /* DTCoreTextCell.swift */; };
 		70373EBD1AA7BD8C00A7C8AC /* DTCoreTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70373EBA1AA7BD8C00A7C8AC /* DTCoreTextCell.xib */; };
 		70373EBE1AA7BD8C00A7C8AC /* DTCoreTextTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70373EBB1AA7BD8C00A7C8AC /* DTCoreTextTableViewController.swift */; };
+		70373EC31AAA534400A7C8AC /* EstimateDuringTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70373EC21AAA534400A7C8AC /* EstimateDuringTableViewController.swift */; };
+		70373EC61AAA551900A7C8AC /* EstimateDuringCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70373EC41AAA551900A7C8AC /* EstimateDuringCell.swift */; };
+		70373EC71AAA551900A7C8AC /* EstimateDuringCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70373EC51AAA551900A7C8AC /* EstimateDuringCell.xib */; };
 		70C3FF501AA76A8C002931A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C3FF4F1AA76A8C002931A1 /* AppDelegate.swift */; };
 		70C3FF521AA76A8C002931A1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C3FF511AA76A8C002931A1 /* ViewController.swift */; };
 		70C3FF551AA76A8C002931A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70C3FF531AA76A8C002931A1 /* Main.storyboard */; };
@@ -42,6 +45,9 @@
 		70373EB91AA7BD8C00A7C8AC /* DTCoreTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTCoreTextCell.swift; sourceTree = "<group>"; };
 		70373EBA1AA7BD8C00A7C8AC /* DTCoreTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DTCoreTextCell.xib; sourceTree = "<group>"; };
 		70373EBB1AA7BD8C00A7C8AC /* DTCoreTextTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTCoreTextTableViewController.swift; sourceTree = "<group>"; };
+		70373EC21AAA534400A7C8AC /* EstimateDuringTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimateDuringTableViewController.swift; sourceTree = "<group>"; };
+		70373EC41AAA551900A7C8AC /* EstimateDuringCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EstimateDuringCell.swift; sourceTree = "<group>"; };
+		70373EC51AAA551900A7C8AC /* EstimateDuringCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EstimateDuringCell.xib; sourceTree = "<group>"; };
 		70C3FF4A1AA76A8C002931A1 /* MultipleWebViews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultipleWebViews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70C3FF4E1AA76A8C002931A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70C3FF4F1AA76A8C002931A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +97,16 @@
 			name = DTCoreTextTableView;
 			sourceTree = "<group>";
 		};
+		70373EC11AAA531000A7C8AC /* EstimateDuringTableView */ = {
+			isa = PBXGroup;
+			children = (
+				70373EC41AAA551900A7C8AC /* EstimateDuringCell.swift */,
+				70373EC51AAA551900A7C8AC /* EstimateDuringCell.xib */,
+				70373EC21AAA534400A7C8AC /* EstimateDuringTableViewController.swift */,
+			);
+			name = EstimateDuringTableView;
+			sourceTree = "<group>";
+		};
 		70C3FF411AA76A8C002931A1 = {
 			isa = PBXGroup;
 			children = (
@@ -115,8 +131,9 @@
 			isa = PBXGroup;
 			children = (
 				70373EB81AA7BD7400A7C8AC /* DTCoreTextTableView */,
-				70D224B81AA7AAD3001A15D6 /* ResizeAfterTableView */,
+				70373EC11AAA531000A7C8AC /* EstimateDuringTableView */,
 				70C3FF731AA76ECA002931A1 /* PreEstimatedTableView */,
+				70D224B81AA7AAD3001A15D6 /* ResizeAfterTableView */,
 				70C3FF4D1AA76A8C002931A1 /* Supporting Files */,
 				70C3FF4F1AA76A8C002931A1 /* AppDelegate.swift */,
 				70C3FF561AA76A8C002931A1 /* Images.xcassets */,
@@ -275,6 +292,7 @@
 			files = (
 				70D224BF1AA7AB66001A15D6 /* ResizeAfterCell.xib in Resources */,
 				70C3FF771AA77008002931A1 /* PreEstimatedCell.xib in Resources */,
+				70373EC71AAA551900A7C8AC /* EstimateDuringCell.xib in Resources */,
 				70C3FF551AA76A8C002931A1 /* Main.storyboard in Resources */,
 				70373EBD1AA7BD8C00A7C8AC /* DTCoreTextCell.xib in Resources */,
 				70C3FF5A1AA76A8C002931A1 /* LaunchScreen.xib in Resources */,
@@ -346,8 +364,10 @@
 			files = (
 				70C3FF521AA76A8C002931A1 /* ViewController.swift in Sources */,
 				70C3FF751AA76EED002931A1 /* PreEstimatedCell.swift in Sources */,
+				70373EC61AAA551900A7C8AC /* EstimateDuringCell.swift in Sources */,
 				70C3FF701AA76B9B002931A1 /* PreEstimatedTableViewController.swift in Sources */,
 				70C3FF501AA76A8C002931A1 /* AppDelegate.swift in Sources */,
+				70373EC31AAA534400A7C8AC /* EstimateDuringTableViewController.swift in Sources */,
 				70D224BE1AA7AB66001A15D6 /* ResizeAfterCell.swift in Sources */,
 				70373EBC1AA7BD8C00A7C8AC /* DTCoreTextCell.swift in Sources */,
 				70C3FF721AA76E20002931A1 /* Model.swift in Sources */,
