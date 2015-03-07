@@ -8,31 +8,33 @@
 
 import Foundation
 import UIKit
+import MBProgressHUD
 
 class PreEstimatedTableViewController: UITableViewController {
     
-    var data: [String] = []
-    
-    var estimationCell: PreEstimatedCell!
-    var estimatedCellHeights: [Int:CGFloat] = [:]
-    var estimatedCellContentHeights: [Int:CGFloat] = [:]
+    var data: [PreEstimatedCellData] = []
     
     //MARK: - UIViewController
     
     override func viewDidLoad() {
-        estimationCell = NSBundle.mainBundle().loadNibNamed("PreEstimatedCell", owner: self, options: nil).first! as PreEstimatedCell
+        super.viewDidLoad()
+        
         tableView.registerNib(UINib(nibName: "PreEstimatedCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "PreEstimatedCell")
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         
         //Load data async
+        var estimationCell = self.tableView.dequeueReusableCellWithIdentifier("PreEstimatedCell") as PreEstimatedCell
+        estimationCell.frame = tableView.frame
+        estimationCell.layoutSubviews()
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            var contents = Model.getTestData()
+            var data = Model.getTestData().map({ PreEstimatedCellData(content: $0) }) as [PreEstimatedCellData]
             
             //Get estimated height for each cell. UIWebView loading is delegate-based, so we have to wait for it to come back with the answer
-            for i in 0 ..< contents.count {
+            for cellData in data {
                 var semaphore = dispatch_semaphore_create(0)
-                self.estimationCell.getEstimatedHeight(contents[i], didEstimateHeight: { (cellHeight, contentHeight) -> () in
-                    self.estimatedCellHeights[i] = cellHeight
-                    self.estimatedCellContentHeights[i] = contentHeight
+                estimationCell.getEstimatedHeight(cellData, didEstimateHeight: { (cellHeight, contentHeight) -> () in
+                    cellData.height = cellHeight
+                    cellData.contentHeight = contentHeight
                     dispatch_semaphore_signal(semaphore)
                 })
                 dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
@@ -40,12 +42,12 @@ class PreEstimatedTableViewController: UITableViewController {
             
             //reload table on main thread
             dispatch_async(dispatch_get_main_queue(), {
-                self.data = contents
+                self.data = data
                 self.tableView.reloadData()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
             })
         })
     }
-    
     
     //MARK: - UITableViewController
     
@@ -53,9 +55,23 @@ class PreEstimatedTableViewController: UITableViewController {
         return data.count
     }
     
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return data[indexPath.row].height ?? UITableViewAutomaticDimension
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var estimatedCell = tableView.dequeueReusableCellWithIdentifier("PreEstimatedCell") as PreEstimatedCell
-        estimatedCell.configureCell(data[indexPath.row], estimatedContentHeight: estimatedCellContentHeights[indexPath.row])
+        estimatedCell.configureCell(data[indexPath.row])
         return estimatedCell
+    }
+}
+
+public class PreEstimatedCellData {
+    var content: String
+    var height: CGFloat?
+    var contentHeight: CGFloat?
+    
+    init(content: String) {
+        self.content = content
     }
 }

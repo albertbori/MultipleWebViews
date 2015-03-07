@@ -15,25 +15,25 @@ public class PreEstimatedCell: UITableViewCell, UIWebViewDelegate {
     @IBOutlet weak var contentWebViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dateLabel: UILabel!
     
-    public func configureCell(htmlContent: String, estimatedContentHeight: CGFloat? = nil) {
+    var cellData: PreEstimatedCellData!
+    
+    public func configureCell(cellData: PreEstimatedCellData) {
+        self.cellData = cellData
         contentWebView.delegate = self
         contentWebView.scrollView.scrollEnabled = false
-        if let estimatedContentHeight = estimatedContentHeight {
-            println("setting contentHeight to \(estimatedContentHeight)")
-            contentWebViewHeightConstraint.constant = estimatedContentHeight
-        }
-        contentWebView.loadHTMLString(htmlContent, baseURL: nil)
+        contentWebViewHeightConstraint.constant = cellData.contentHeight ?? 1.0
+        contentWebView.loadHTMLString(cellData.content, baseURL: nil)
         dateLabel.text = NSDate().description
     }
     
     private var _didEstimateContentHeight: ((contentHeight: CGFloat) -> ())?
-    func getEstimatedHeight(htmlContent: String, didEstimateHeight: (cellHeight: CGFloat, contentHeight: CGFloat) -> ()) {
+    func getEstimatedHeight(cellData: PreEstimatedCellData, didEstimateHeight: (cellHeight: CGFloat, contentHeight: CGFloat) -> ()) {
         _didEstimateContentHeight = { contentHeight in
             var cellHeight = self.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
             println("got cellHeight: \(cellHeight) from contentHeight: \(contentHeight)")
             didEstimateHeight(cellHeight: cellHeight, contentHeight: contentHeight)
         }
-        configureCell(htmlContent)
+        configureCell(cellData)
     }
     
     public func webViewDidFinishLoad(webView: UIWebView) {
